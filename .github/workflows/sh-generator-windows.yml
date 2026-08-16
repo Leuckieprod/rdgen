@@ -146,9 +146,10 @@ jobs:
           nuget-version: 'latest'
 
       - name: Install LLVM
+        shell: bash
         run: |
           choco install llvm -y
-          echo "LIBCLANG_PATH=C:\Program Files\LLVM\bin" >> $env:GITHUB_ENV
+          echo "LIBCLANG_PATH=C:\Program Files\LLVM\bin" >> $GITHUB_ENV
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
