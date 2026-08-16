@@ -343,7 +343,7 @@ jobs:
           cd ..
 
       - name: Build rustdesk
-      env:
+        env:
           LIBCLANG_PATH: ${{ env.LLVM_PATH }}\bin
         run: |
           python3 .\build.py --portable --hwcodec --flutter --vram --skip-portable-pack
