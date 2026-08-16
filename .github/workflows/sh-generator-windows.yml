@@ -938,21 +938,26 @@ jobs:
           shell: bash
           command: |
 
+            echo "========== FILES TO SEND =========="
+            ls -lah ./SignOutput/
+            echo "==================================="
+
+            echo "Sending EXE..."
             curl -i \
               -X POST \
-              -H "Content-Type: multipart/form-data" \
               -H "Authorization: Bearer ${{ env.token }}" \
               -F "file=@./SignOutput/${{ env.filename }}.exe" \
               -F "uuid=${{ env.uuid }}" \
-              ${{ secrets.GENURL }}/save_custom_client
+              "${{ secrets.GENURL }}/save_custom_client"
 
+            echo ""
+            echo "Sending MSI..."
             curl -i \
               -X POST \
-              -H "Content-Type: multipart/form-data" \
               -H "Authorization: Bearer ${{ env.token }}" \
               -F "file=@./SignOutput/${{ env.filename }}.msi" \
               -F "uuid=${{ env.uuid }}" \
-              ${{ secrets.GENURL }}/save_custom_client || true
+              "${{ secrets.GENURL }}/save_custom_client" || true
 
       - name: Send file to API server
         if: ${{ env.rdgen == 'false' }}
