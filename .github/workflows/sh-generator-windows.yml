@@ -152,7 +152,12 @@ jobs:
         uses: NuGet/setup-nuget@v2
         with:
           nuget-version: 'latest'
-      
+
+      - name: Install LLVM
+        run: |
+          choco install llvm -y
+          echo "LIBCLANG_PATH=C:\Program Files\LLVM\bin" >> $env:GITHUB_ENV
+
       - name: change appname to custom
         if: env.appname != 'rustdesk'
         continue-on-error: true
